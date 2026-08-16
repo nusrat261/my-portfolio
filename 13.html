@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nusrat Jahan Ome — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #0B1E3D;
+    --paper: #122A52;
+    --ink: #FFFFFF;
+    --ink-soft: #C3D0E8;
+    --teal: #7EC8E3;
+    --marigold: #F2A93B;
+    --rust: #FF8B6B;
+    --leaf: #6FCF97;
+    --line: #26406E;
+    --shadow: rgba(0,0,0,0.35);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:'Inter', sans-serif; line-height:1.65;
+  }
+  h1,h2,h3{ font-family:'Fraunces', serif; margin:0; }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  a{ color:inherit; }
+  :focus-visible{ outline:3px solid var(--rust); outline-offset:3px; border-radius:4px; }
+  img{ max-width:100%; display:block; }
+
+  /* -------- nav -------- */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);
+    background:rgba(11,30,61,0.92); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .brand{ font-family:'Fraunces',serif; font-weight:600; font-size:1.25rem; color:var(--ink); }
+  .nav .brand span{ color:var(--rust); }
+  .nav ul{ list-style:none; display:flex; gap:28px; margin:0; padding:0; }
+  .nav a{ text-decoration:none; font-size:0.95rem; color:var(--ink-soft); font-weight:500; transition:color .15s; }
+  .nav a:hover{ color:var(--rust); }
+
+  /* -------- main layout container (Centered Content) -------- */
+  .main-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* -------- hero -------- */
+  .hero{
+    position:relative;
+    width: 100%;
+    padding:80px 0 60px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+  }
+  .blob{
+    position:absolute; border-radius:50%; filter:blur(4px); opacity:0.25; z-index:0;
+  }
+  .blob1{ width:340px; height:340px; background:var(--marigold); top:-90px; right:5%; }
+  .blob2{ width:220px; height:220px; background:var(--leaf); bottom:-60px; left:5%; opacity:0.2; }
+
+  .hero-text{ position:relative; z-index:1; width:100%; display:flex; flex-direction:column; align-items:center; }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:0.85rem; letter-spacing:0.06em;
+    color:var(--rust); text-transform:uppercase; display:inline-block; margin-bottom:16px;
+  }
+  .hero h1{ font-size:clamp(2.5rem,5.5vw,3.8rem); font-weight:600; line-height:1.15; }
+  .type-cursor{ display:inline-block; color:var(--rust); animation:blink 0.9s step-end infinite; font-weight:400; }
+  @media (prefers-reduced-motion: reduce){ .type-cursor{ animation:none; } }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .hero h1 em{ font-style:italic; color:var(--rust); }
+  .hero-sub{ margin-top:20px; color:var(--ink-soft); font-size:1.1rem; max-width:54ch; margin-left:auto; margin-right:auto; }
+  .hero-motto{
+    margin-top:18px; font-family:'JetBrains Mono',monospace; font-size:0.88rem;
+    font-weight:600; letter-spacing:0.05em; color:var(--rust); text-transform:uppercase;
+  }
+  .hero-motto span{ color:var(--marigold); margin:0 6px; }
+  
+  .hero-actions{ margin-top:32px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:0.95rem;
+    padding:14px 28px; border-radius:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{ background:var(--rust); color:#fff; box-shadow:0 10px 22px rgba(255,139,107,0.3); }
+  .btn-primary:hover{ transform:translateY(-2px); box-shadow:0 14px 26px rgba(255,139,107,0.45); }
+  .btn-ghost{ background:transparent; color:var(--teal); border:2px solid var(--teal); }
+  .btn-ghost:hover{ transform:translateY(-2px); background:var(--teal); color:#fff; }
+
+  /* -------- section formatting -------- */
+  section{ padding:70px 0; width:100%; display:flex; flex-direction:column; align-items:center; }
+  .sec-head{ margin-bottom:40px; text-align:center; }
+  .sec-head .eyebrow{ margin-bottom:8px; }
+  .sec-head h2{ font-size:clamp(1.8rem,3.8vw,2.4rem); position:relative; display:inline-block; }
+  .sec-head h2::after {
+    content:''; display:block; width:50px; height:3px; background:var(--rust); margin:10px auto 0; border-radius:2px;
+  }
+
+  /* -------- about -------- */
+  .about-photo-row{
+    display:flex; flex-direction:column; align-items:center; gap:28px;
+    margin-bottom:32px; width:100%;
+  }
+  .mini-frame{
+    width:220px; height:220px; border-radius:50%; overflow:hidden;
+    border:4px solid var(--rust); box-shadow:0 12px 28px var(--shadow);
+    position:relative; flex-shrink:0;
+  }
+  .mini-frame img{ width:100%; height:100%; object-fit:cover; }
+  
+  .card{
+    background:var(--paper); border:1px solid var(--line); border-radius:20px;
+    padding:32px; box-shadow:0 8px 24px var(--shadow); width:100%; text-align:center;
+  }
+  .card p{ color:var(--ink-soft); margin:0; font-size:1.05rem; line-height:1.7; }
+  .card p + p{ margin-top:14px; }
+
+  .about-grid{ display:flex; flex-direction:column; gap:24px; width:100%; }
+
+  .timeline{ display:flex; flex-direction:column; gap:18px; width:100%; align-items:center; }
+  .tl-item{
+    position:relative; display:flex; gap:20px; align-items:center; text-align:left;
+    background:var(--cream); border-radius:18px; padding:20px 24px;
+    border-left:5px solid var(--marigold); width:100%; max-width:650px;
+  }
+  .tl-item:nth-child(2){ border-left-color:var(--rust); }
+  .tl-item:nth-child(3){ border-left-color:var(--teal); }
+  .tl-badge{
+    flex:0 0 auto;
+    width:60px; height:60px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; flex-direction:column;
+    background:var(--marigold); box-shadow:0 6px 16px var(--shadow);
+  }
+  .tl-badge .yr{ font-family:'Fraunces',serif; font-weight:700; font-size:1.05rem; color:var(--cream); line-height:1; }
+  .tl-badge .lvl{ font-family:'JetBrains Mono',monospace; font-size:0.6rem; color:var(--cream); opacity:0.85; margin-top:2px; }
+  .tl-item:nth-child(2) .tl-badge{ background:var(--rust); }
+  .tl-item:nth-child(3) .tl-badge{ background:var(--teal); }
+  .tl-year{ font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--rust); font-weight:600; letter-spacing:0.06em; text-transform:uppercase; }
+  .tl-item:nth-child(2) .tl-year{ color:var(--marigold); }
+  .tl-item:nth-child(3) .tl-year{ color:var(--teal); }
+  .tl-title{ font-family:'Fraunces',serif; font-size:1.15rem; font-weight:600; margin-top:2px; }
+  .tl-note{
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:0.85rem; color:var(--leaf); margin-top:6px; font-weight:600;
+  }
+  .tl-note svg{ width:14px; height:14px; stroke:var(--leaf); flex:0 0 auto; }
+  .tl-note.ongoing{ color:var(--teal); }
+  .tl-note.ongoing svg{ stroke:var(--teal); animation:pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:0.35; } }
+  .tl-sub{ color:var(--ink-soft); font-size:0.95rem; }
+
+  /* -------- skills -------- */
+  .skills-wrap{ display:flex; flex-direction:column; gap:16px; width:100%; max-width:600px; margin:0 auto; }
+  .skill-chip{
+    display:flex; align-items:center; gap:16px;
+    background:var(--paper); border:1.5px solid var(--line); border-radius:16px;
+    padding:16px 22px; font-family:'JetBrains Mono',monospace; font-size:0.95rem; font-weight:600;
+    box-shadow:0 6px 16px var(--shadow); transition:transform .15s ease;
+  }
+  .skill-chip:hover{ transform:translateY(-3px); }
+  .skill-dot{ display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; flex:0 0 auto; }
+  .skill-dot svg{ width:28px; height:28px; }
+  .skill-name{ flex:0 0 100px; text-align:left; }
+  .skill-bar-track{
+    flex:1 1 auto; height:10px; border-radius:6px; background:var(--line); overflow:hidden;
+  }
+  .skill-bar-fill{ height:100%; border-radius:6px; background:var(--marigold); }
+  .skill-pct{ flex:0 0 auto; font-size:0.88rem; color:var(--ink-soft); min-width:40px; text-align:right; }
+
+  /* -------- hobbies -------- */
+  .hobbies-grid{
+    display:flex; flex-wrap:wrap; gap:16px; justify-content:center; width:100%; max-width:750px;
+  }
+  .hobby-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:20px 24px; flex:1 1 200px; max-width:240px; text-align:center;
+    box-shadow:0 6px 16px var(--shadow); transition:transform .15s ease;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .hobby-card:hover{ transform:translateY(-3px); border-color:var(--rust); }
+  .hobby-icon{ font-size:2rem; }
+  .hobby-title{ font-weight:600; font-size:1.05rem; color:var(--ink); }
+
+  /* -------- projects -------- */
+  .proj-grid{ display:flex; flex-direction:column; gap:24px; width:100%; max-width:680px; margin:0 auto; }
+  .proj-card{
+    background:var(--paper); border-radius:20px; padding:32px;
+    border:1px solid var(--line); box-shadow:0 10px 24px var(--shadow);
+    transition:transform .2s ease, box-shadow .2s ease; text-align:center;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .proj-card:hover{ transform:translateY(-4px); box-shadow:0 16px 32px var(--shadow); }
+  .proj-card h3{ font-size:1.3rem; margin:10px 0 12px; }
+  .proj-card p{ color:var(--ink-soft); font-size:0.98rem; max-width:52ch; line-height:1.65; }
+  .proj-tags{ margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .proj-tags span{
+    font-family:'JetBrains Mono',monospace; font-size:0.78rem; padding:5px 12px;
+    border-radius:20px; background:var(--cream); color:var(--teal); border:1px solid var(--line);
+  }
+
+  /* -------- contact -------- */
+  .contact-card{
+    background:linear-gradient(135deg, #0B1E3D, #1E5C74);
+    border-radius:26px; padding:56px clamp(20px,5vw,48px); color:#fff; text-align:center;
+    position:relative; overflow:hidden; width:100%; border:1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .contact-card::before{
+    content:''; position:absolute; width:260px; height:260px; border-radius:50%;
+    background:var(--marigold); opacity:0.12; top:-100px; right:-80px;
+  }
+  .contact-card h2{ color:#fff; font-size:clamp(1.8rem,3.8vw,2.4rem); position:relative; }
+  .contact-card p{ color:#DCEAF0; max-width:48ch; margin:16px auto 28px; position:relative; font-size:1.05rem; }
+  .contact-card .btn-primary{ background:var(--marigold); color:var(--cream); font-weight:700; box-shadow:none; position:relative; }
+  .contact-card .btn-primary:hover{ background:#f5b352; }
+  .contact-list{
+    margin-top:36px; display:flex; flex-wrap:wrap; gap:16px; justify-content:center;
+    position:relative; width:100%;
+  }
+  .contact-list a, .contact-list .c-item{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    text-decoration:none; color:#fff;
+    background:rgba(255,255,255,0.06); border:1.5px solid rgba(255,255,255,0.15);
+    border-radius:16px; padding:18px 24px; flex:1 1 180px; max-width:240px;
+    transition:transform .18s ease, background .18s ease;
+  }
+  .contact-list a:hover{ transform:translateY(-4px); background:rgba(255,255,255,0.14); }
+  .contact-list .c-label{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:#9FB4CC;
+    display:flex; align-items:center; gap:6px;
+  }
+  .contact-list .c-label svg{ width:14px; height:14px; stroke:#9FB4CC; flex:0 0 auto; }
+  .contact-list .c-label svg.filled{ fill:#9FB4CC; stroke:none; }
+  .contact-list .c-value{ font-size:0.95rem; font-weight:600; word-break:break-all; }
+
+  footer{ text-align:center; padding:40px 24px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; font-size:0.85rem; }
+
+  @media (max-width:768px){
+    .nav ul{ display:none; }
+    .skill-chip{ flex-wrap:wrap; justify-content:center; }
+    .skill-name{ text-align:center; flex:0 0 100%; }
+    .skill-bar-track{ width:100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="brand">Nusrat<span>.</span>dev</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="main-wrapper">
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="home">
+    <div class="blob blob1" aria-hidden="true"></div>
+    <div class="blob blob2" aria-hidden="true"></div>
+
+    <div class="hero-text">
+      <span class="eyebrow">Portfolio</span>
+      <h1 id="typedHeading"><span id="typedText">Hi, I'm Nusrat Jahan Ome</span><span class="type-cursor">|</span></h1>
+      <p class="hero-sub">A Computer Science student with a passion for technology and creativity. I love turning simple ideas into thoughtful digital experiences and learning something new with every project.</p>
+      <p class="hero-motto">Learn <span>•</span> Create <span>•</span> Explore <span>•</span> Grow</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:nus2020rat@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg> Get In Touch
+        </a>
+        <a class="btn btn-ghost" href="#projects">View Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <div class="sec-head">
+      <span class="eyebrow">Who I Am</span>
+      <h2>About Me</h2>
+    </div>
+    
+    <div class="about-photo-row">
+      <div class="mini-frame">
+        <img src="nusrat.jpg" alt="Nusrat Jahan Ome">
+      </div>
+      <div class="card">
+        <p>Hi! I'm a Computer Science and Engineering student, currently studying at the University of Asia Pacific. I'm deeply interested in programming, software engineering, and web development.</p>
+        <p>I have core knowledge in Java, Python, SQL, HTML, and CSS. I enjoy tackling complex logic, solving problems, and building impactful digital projects.</p>
+      </div>
+    </div>
+
+    <div class="about-grid">
+      <div class="card">
+        <h3 style="font-size:1.2rem; margin-bottom:20px; color:var(--marigold);">Education Timeline</h3>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-badge">
+              <span class="yr">2020</span>
+              <span class="lvl">SSC</span>
+            </div>
+            <div>
+              <div class="tl-year">Secondary School Certificate</div>
+              <div class="tl-title">Alonia High School</div>
+              <div class="tl-sub">Science Stream</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-badge">
+              <span class="yr">2022</span>
+              <span class="lvl">HSC</span>
+            </div>
+            <div>
+              <div class="tl-year">Higher Secondary Certificate</div>
+              <div class="tl-title">Gridkalindia Hazera Hasmat University College</div>
+              <div class="tl-sub">Science Stream</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-badge">
+              <span class="yr">Now</span>
+              <span class="lvl">B.Sc.</span>
+            </div>
+            <div>
+              <div class="tl-year">Undergraduate (Ongoing)</div>
+              <div class="tl-title">University of Asia Pacific</div>
+              <div class="tl-note ongoing">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                B.Sc. in Computer Science and Engineering
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:1.2rem; margin-bottom:12px; color:var(--marigold);">My Career Goal</h3>
+        <p>My aim is to build a robust professional career in software development and technology. I am committed to continuous learning and eager to build scalable, high-impact applications that solve real-world challenges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills">
+    <div class="sec-head">
+      <span class="eyebrow">Technical Expertise</span>
+      <h2>Skills & Competencies</h2>
+    </div>
+    <div class="skills-wrap">
+      <div class="skill-chip">
+        <span class="skill-dot"><svg viewBox="0 0 128 128"><path fill="#E44D26" d="M19 112L9 0h110l-10 112L64 128z"/><path fill="#F16529" d="M64 119l40-11 9-96H64z"/><path fill="#EBEBEB" d="M64 52H44l-1-16h21V21H26l4 46h34zM64 89l-18-5-1-13H30l2 25 32 9z"/><path fill="#fff" d="M64 52v15h19l-2 20-17 5v17l32-9 4-46zM64 21v15h37l1-4 3-11z"/></svg></span>
+        <span class="skill-name">HTML</span>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%; background:#E44D26;"></div></div>
+        <span class="skill-pct">70%</span>
+      </div>
+      <div class="skill-chip">
+        <span class="skill-dot"><svg viewBox="0 0 128 128"><path fill="#1572B6" d="M19 112L9 0h110l-10 112L64 128z"/><path fill="#33A9DC" d="M64 119l40-11 9-96H64z"/><path fill="#fff" d="M64 52h20l1-16H64V21h39l-4 46H64zM64 90l-17-5-1-12H30l2 24 32 9z"/><path fill="#EBEBEB" d="M64 52v16h19l-2 20-17 5v17l32-9 4-46zM64 21v15H27l-1-11-1-4z"/></svg></span>
+        <span class="skill-name">CSS</span>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:60%; background:#1572B6;"></div></div>
+        <span class="skill-pct">60%</span>
+      </div>
+      <div class="skill-chip">
+        <span class="skill-dot"><svg viewBox="0 0 128 128"><path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/><path fill="#323330" d="M67.312 108.9c2.375 3.87 5.462 6.72 10.92 6.72 4.58 0 7.505-2.29 7.505-5.458 0-3.793-3.004-5.135-8.038-7.343l-2.76-1.185c-7.97-3.395-13.263-7.65-13.263-16.65 0-8.29 6.31-14.6 16.176-14.6 7.02 0 12.07 2.44 15.708 8.85l-8.6 5.518c-1.894-3.395-3.934-4.73-7.108-4.73-3.236 0-5.285 2.05-5.285 4.73 0 3.317 2.05 4.657 6.79 6.71l2.76 1.183c9.384 4.02 14.68 8.12 14.68 17.34 0 9.95-7.82 15.4-18.323 15.4-10.27 0-16.9-4.896-20.16-11.31zM33.815 109.7c1.735 3.075 3.317 5.68 7.108 5.68 3.626 0 5.912-1.418 5.912-6.933V63.05h11.052v45.475c0 11.428-6.702 16.626-16.48 16.626-8.828 0-13.94-4.573-16.548-10.077z"/></svg></span>
+        <span class="skill-name">JavaScript</span>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:66%; background:#F0DB4F;"></div></div>
+        <span class="skill-pct">66%</span>
+      </div>
+      <div class="skill-chip">
+        <span class="skill-dot"><svg viewBox="0 0 24 24" fill="none" stroke="var(--marigold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/></svg></span>
+        <span class="skill-name">SQL</span>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%; background:var(--marigold);"></div></div>
+        <span class="skill-pct">80%</span>
+      </div>
+      <div class="skill-chip">
+        <span class="skill-dot"><svg viewBox="0 0 128 128"><path fill="#3776AB" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137H29.977c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491V67.234c0-8.151 7.052-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548V15.833c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zM50.037 9.557c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"/><path fill="#FFD43B" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655H51.591c-6.756 0-12.346 5.783-12.346 12.548v23.513c0 6.692 5.818 10.628 12.346 12.548 7.816 2.297 15.312 2.714 24.665 0 6.216-1.801 12.346-5.423 12.346-12.548v-9.412H63.938v-3.138h37.012c7.176 0 9.852-5.005 12.347-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.347-12.521h-9.268zM77.809 87.927c2.56 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"/></svg></span>
+        <span class="skill-name">Python</span>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:65%; background:#3776AB;"></div></div>
+        <span class="skill-pct">65%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES SECTION -->
+  <section id="hobbies">
+    <div class="sec-head">
+      <span class="eyebrow">Personal Interests</span>
+      <h2>Hobbies & Passions</h2>
+    </div>
+    <div class="hobbies-grid">
+      <div class="hobby-card">
+        <div class="hobby-icon">🎬</div>
+        <div class="hobby-title">Watching Movies & Dramas</div>
+      </div>
+      <div class="hobby-card">
+        <div class="hobby-icon">🎨</div>
+        <div class="hobby-title">Art & Drawing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects">
+    <div class="sec-head">
+      <span class="eyebrow">Featured Work</span>
+      <h2>Academic Projects</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <h3>Electronic Voting Machine – EVM Management System</h3>
+        <p>A comprehensive digital voting management platform that seamlessly integrates voter registration, candidate management, secure electronic voting, and live constituency-wise election results.</p>
+        <div class="proj-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>MySQL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="contact-card">
+      <span class="eyebrow" style="color:var(--teal);">Get In Touch</span>
+      <h2>Let's Make Something Happen</h2>
+      <p>I am open to new software development projects, academic collaborations, and entry-level career opportunities.</p>
+      <a class="btn btn-primary" href="mailto:nus2020rat@gmail.com">Send Me An Email</a>
+      <div class="contact-list">
+        <a href="mailto:nus2020rat@gmail.com">
+          <span class="c-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 6 10-6"/></svg>Email</span>
+          <span class="c-value">nus2020rat@gmail.com</span>
+        </a>
+        <a href="tel:+8801700803356">
+          <span class="c-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.7a2 2 0 0 1-.4 2.1L8.1 9.7a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.7.6a2 2 0 0 1 1.9 2.2z"/></svg>Phone</span>
+          <span class="c-value">01700-803356</span>
+        </a>
+        <a href="https://github.com/nusrat261" target="_blank" rel="noopener">
+          <span class="c-label"><svg viewBox="0 0 24 24" class="filled"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.61-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.03 10.03 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg>GitHub</span>
+          <span class="c-value">github.com/nusrat261</span>
+        </a>
+        <div class="c-item">
+          <span class="c-label"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Location</span>
+          <span class="c-value">Dhaka, Bangladesh</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>© 2026 Nusrat Jahan Ome — All Rights Reserved</footer>
+
+<script>
+  document.querySelectorAll('.nav a').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      const target = document.querySelector(id);
+      if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+
+  (function typeHeading(){
+    const el = document.getElementById('typedText');
+    if(!el) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(prefersReduced) return;
+    const full = "Hi, I'm Nusrat Jahan Ome";
+    const nameStart = full.indexOf('Nusrat');
+    el.textContent = '';
+    let i = 0;
+    function tick(){
+      if(i <= full.length){
+        const typed = full.slice(0, i);
+        if(i > nameStart){
+          el.innerHTML = full.slice(0, nameStart) + '<em>' + full.slice(nameStart, i) + '</em>';
+        } else {
+          el.textContent = typed;
+        }
+        i++;
+        setTimeout(tick, 55);
+      }
+    }
+    tick();
+  })();
+</script>
+
+</body>
+</html>
